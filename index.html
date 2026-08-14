@@ -1,16 +1,3 @@
-<!doctype html>
-<html lang="fr">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ma Boutique</title><link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-<header class="header"><a class="logo" href="index.html">Ma Boutique</a><nav><a href="index.html">Accueil</a><a href="cart.html">Panier <span id="cartCount" class="badge">0</span></a><a href="admin/index.html">Admin</a></nav></header>
-<main class="container">
-<section class="hero"><div><p class="eyebrow">BOUTIQUE EN LIGNE</p><h1>Découvrez nos produits</h1><p>Commandez facilement, partout en Algérie.</p></div></section>
-<div class="toolbar"><input id="search" placeholder="Rechercher un produit…"><select id="category"><option value="">Toutes les catégories</option></select></div>
-<section id="products" class="grid"></section><p id="empty" class="empty hidden">Aucun produit trouvé.</p>
-</main>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/config.js"></script><script src="js/shop.js"></script>
-</body></html>
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin — Connexion</title><link rel="stylesheet" href="../css/style.css"></head>
+<body><main class="auth"><form id="loginForm" class="card form"><h1>Administration</h1><p>Connexion sécurisée</p><label>Email<input type="email" name="email" required></label><label>Mot de passe<input type="password" name="password" required></label><button class="btn">Se connecter</button><p id="loginMsg"></p></form></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="../js/config.js"></script><script src="../js/admin.js"></script><script>initLogin()</script></body></html>
