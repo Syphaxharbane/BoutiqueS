@@ -1,0 +1,13 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Commander</title><link rel="stylesheet" href="css/style.css"></head>
+<body><header class="header"><a class="logo" href="index.html">Ma Boutique</a><nav><a href="cart.html">Panier</a></nav></header>
+<main class="container narrow"><h1>Finaliser la commande</h1>
+<form id="checkoutForm" class="card form">
+<label>Nom et prénom<input name="customer_name" required></label>
+<label>Téléphone<input name="phone" type="tel" required></label>
+<label>Wilaya<select name="wilaya" id="wilaya" required></select></label>
+<label>Commune<input name="commune" required></label>
+<label>Adresse complète<textarea name="address" required></textarea></label>
+<label>Note (facultatif)<textarea name="note"></textarea></label>
+<div id="summary" class="summary"></div><button class="btn" type="submit">Confirmer la commande</button>
+<p id="checkoutMsg"></p></form></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="js/config.js"></script><script src="js/shop.js"></script><script>initCheckout()</script></body></html>
