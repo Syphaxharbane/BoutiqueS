@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin - Test connexion</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f5f5f5;padding:20px}
+.box{max-width:430px;margin:40px auto;background:#fff;padding:25px;border-radius:16px}
+input,button{width:100%;padding:13px;margin-top:8px;box-sizing:border-box;border-radius:9px}
+input{border:1px solid #ddd;font-size:16px}button{border:0;background:#111;color:#fff;font-weight:bold;font-size:16px}
+#status{margin:15px 0;padding:12px;border-radius:8px;background:#eee;white-space:pre-wrap}
+.ok{background:#e4f7e9!important;color:#126b2e}.err{background:#ffe5e5!important;color:#a00000}
+</style>
+</head>
+<body>
+<div class="box">
+<h1>Administration</h1>
+<div id="status">Vérification de la connexion...</div>
+<form id="loginForm">
+<input id="email" type="email" placeholder="Email" required>
+<input id="password" type="password" placeholder="Mot de passe" required>
+<button type="submit">Se connecter</button>
+</form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){
+  const status=document.getElementById("status");
+  function show(text, cls){status.textContent=text;status.className=cls||"";}
+
+  window.addEventListener("error", function(e){
+    show("Erreur JavaScript : " + (e.message || "erreur inconnue"), "err");
+  });
+
+  if(!window.supabase){
+    show("ERREUR : la bibliothèque Supabase ne s'est pas chargée. Vérifie la connexion Internet puis recharge la page.","err");
+    return;
+  }
+
+  const SUPABASE_URL="https://wcywehfmnvcehgihgqsk.supabase.co";
+  const SUPABASE_ANON_KEY="sb_publishable_nFQ8XXdhLqhmmpq2x8Yf7w_wEj1rht2";
+
+  let client;
+  try{
+    client=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+    show("✓ Supabase est correctement chargé. Tu peux te connecter.","ok");
+  }catch(e){
+    show("ERREUR lors de la création du client Supabase :\n"+e.message,"err");
+    return;
+  }
+
+  document.getElementById("loginForm").addEventListener("submit",async function(e){
+    e.preventDefault();
+    show("Connexion en cours...");
+    const email=document.getElementById("email").value.trim();
+    const password=document.getElementById("password").value;
+    try{
+      const result=await client.auth.signInWithPassword({email,password});
+      if(result.error){
+        show("ERREUR SUPABASE :\n"+result.error.message,"err");
+        return;
+      }
+      show("✓ Connexion réussie ! Redirection...","ok");
+      setTimeout(function(){location.href="dashboard.html";},700);
+    }catch(e){
+      show("ERREUR :\n"+e.message,"err");
+    }
+  });
+})();
+</script>
+</body>
+</html>
